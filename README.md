@@ -25,7 +25,7 @@ c. you need to change the file mode bits for 'chromedriver' if on linux system.
 pip install -r requirements.txt
 ```
 
-# mysql database createment script:
+# mysql database create script:
 ```
 ./mysql_script/*
 ```
@@ -71,4 +71,12 @@ on file ./logger.conf, you have to configure the [handler_fileHandler] correctly
 for example:
 args=('/services/appannie_crawler/logs/log.log', 'D')
 and make sure that the parent directories are already exist before start running.
+```
+
+# appannie account management files:
+```
+on directory manageraccounts/accounts/ you can find many files name end with '_appannie_accounts.py',
+you need to add accounts to each country spcific file.
+if you don't have as many as accounts to configure all countries '_appannie_accounts.py' files,
+you can write a account proxy to re-allocate the accounts, for example: ./managercookies/account_proxy.py
 ```
