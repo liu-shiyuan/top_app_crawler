@@ -6,7 +6,7 @@ import settings as _s
 def get_db_conn():
     db = None
     try:
-        db = pymysql.connect(host=_s.mysql_host, user=_s.mysql_user, passwd=_s.mysql_pwd, db=_s.mysql_db, charset='utf8')
+        db = pymysql.connect(host=_s.mysql_host, user=_s.mysql_user, passwd=_s.mysql_pwd, db=_s.mysql_db, charset='utf8mb4')
     except Exception as e:
         pass
     return db

@@ -10,9 +10,10 @@ from appannieenum import AppannieCountry, IOSGameCategory, IOSFeedType, OSType
 from retry import retry
 from crawlexception import NoAccountException
 import os
-from commonutils import get_category_display_name, ios_feed_to_order_by, wait_account_to_continue
+from commonutils import get_category_display_name, ios_feed_to_order_by, wait_account_to_continue, MisfireJob
 import pytz
 from bs4 import BeautifulSoup as Bs
+from crawltask.refire_task import add_re_fire_job
 
 
 def run_ios_top_task(country=AppannieCountry.UNITED_STATE, query_date=None, sub_category_code=None, feed=None):
@@ -32,6 +33,7 @@ def run_ios_top_task(country=AppannieCountry.UNITED_STATE, query_date=None, sub_
                 except Exception as e:
                     get_logger().info('(ios) traceback:\n%s' % traceback.format_exc())
                     get_misfire_logger().info(e.__str__())
+                    add_re_fire_job(MisfireJob(query_date, country, OSType.IOS, _display_category_name, _feed))
                 time.sleep(10)
             time.sleep(20)
 

@@ -5,6 +5,7 @@ import pytz
 from urllib import parse
 import time
 import re
+from collections import namedtuple
 
 
 def get_category_display_name(str_category_code):
@@ -118,3 +119,5 @@ def get_cst_to_machine_hour_and_minute(h_m):
     ret = tmp_time.strftime('%H:%M')
     return ret
 
+
+MisfireJob = namedtuple('MisfireJob', ['query_date', 'country', 'os', 'category', 'feed_type'])

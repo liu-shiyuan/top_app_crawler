@@ -11,9 +11,10 @@ import os
 from datetime import datetime, timedelta
 import pytz
 from crawlexception import NoAccountException
-from commonutils import wait_account_to_continue, android_feed_to_order_by
+from commonutils import wait_account_to_continue, android_feed_to_order_by, MisfireJob
 from thecrawler import AndroidTopListCrawler, AndroidTopListParser, IterateTopAppInsert, CrawledDataPolisher
 from db import insert_table_app_ranking
+from crawltask.refire_task import add_re_fire_job
 
 
 def run_android_top_task(country=AppannieCountry.UNITED_STATE, query_date=None, sub_category_code=None, feed=None):
@@ -33,6 +34,7 @@ def run_android_top_task(country=AppannieCountry.UNITED_STATE, query_date=None, 
                 except Exception as e:
                     get_logger().info('(android) traceback:\n%s' % traceback.format_exc())
                     get_misfire_logger().info(e.__str__())
+                    add_re_fire_job(MisfireJob(query_date, country, OSType.Android, _display_category_name, _feed))
                 time.sleep(10)
             time.sleep(20)
 

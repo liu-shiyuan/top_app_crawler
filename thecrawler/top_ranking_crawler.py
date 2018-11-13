@@ -37,7 +37,7 @@ class TopListCrawler:
             else:
                 crawl_date = get_cst_yesterday()
             timeout_msg = crawl_date + ' ' + self._country + ' ' + _ret_file_name
-            with time_limit(_s.top_charts_page_crawler_time_out, 'timeout while crawling: %s.' % timeout_msg):
+            with time_limit(_s.top_charts_page_crawler_time_out, 'timeout while crawling: %s' % timeout_msg):
                 _is_success = self._do_crawl(_url)
             if _is_success:
                 with open(_s.default_data_store_dir + _ret_file_name, 'w', encoding='utf-8') as f:

@@ -44,6 +44,9 @@ class IterateTopAppInsert:
                 db_record = top_app_handler.query_record_by_app_id(_record[TopAppDBField.FIELD_APP_ID])
                 if db_record:
                     update_columns = []
+                    if db_record[TopAppDBField.FIELD_APP_NAME] != _record[TopAppDBField.FIELD_APP_NAME]:
+                        db_record[TopAppDBField.FIELD_APP_NAME] = _record[TopAppDBField.FIELD_APP_NAME]
+                        update_columns.append(TopAppDBField.FIELD_APP_NAME)
                     if not db_record[TopAppDBField.FIELD_STORE_URL]:
                         store_url = url_crawler.crawl_store_url(_record, lambda: time.sleep(
                             _s.store_url_crawl_interval + randint(0, 5)))
