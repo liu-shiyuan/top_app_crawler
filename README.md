@@ -15,7 +15,7 @@ gpgkey=https://dl-ssl.google.com/linux/linux_signing_key.pub
 b. run command:
 #> yum -y install google-chrome-stable
 
-c. you need to change the file mode bits for 'chromedriver' if on linux system.
+3. you need to change the file mode bits for 'chromedriver' if on linux system.
 #> chmod 777 ./chromedriver
 ```
 
