@@ -14,7 +14,7 @@ from crawlexception import NoAccountException
 from commonutils import wait_account_to_continue, android_feed_to_order_by, MisfireJob
 from thecrawler import AndroidTopListCrawler, AndroidTopListParser, IterateTopAppInsert, CrawledDataPolisher
 from db import insert_table_app_ranking
-from crawltask.refire_task import add_re_fire_job
+from crawltask.refire_queue import add_re_fire_job
 
 
 def run_android_top_task(country=AppannieCountry.UNITED_STATE, query_date=None, sub_category_code=None, feed=None):

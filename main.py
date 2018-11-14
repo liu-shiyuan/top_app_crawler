@@ -8,6 +8,7 @@ from loggers import get_logger
 from commonutils import get_cst_yesterday, get_cst_to_machine_hour_and_minute
 from crawltask.fix_broken_app_icon_task import fix_daily_app_icon_task
 from multiprocessing import Process
+from crawltask.refire_task import re_fire
 
 
 def job_queue_1():
@@ -55,6 +56,8 @@ def queue_2_process():
 
 
 if __name__ == '__main__':
+    Process(target=re_fire).start()
+
     cst_start_ios_job_time_str = '05:00'
     cst_start_android_job_time_str = '05:03'
 
