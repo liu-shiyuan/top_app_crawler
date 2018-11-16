@@ -24,6 +24,8 @@ def job_queue_1():
     run_android_top_task(country=AppannieCountry.SINGAPORE, query_date=query_date)
     run_ios_top_task(country=AppannieCountry.MALAYSIA, query_date=query_date)
     run_android_top_task(country=AppannieCountry.MALAYSIA, query_date=query_date)
+
+    re_fire()
     get_logger().info('fix_daily_app_icon_task: %s' % query_date)
     fix_daily_app_icon_task(query_date)
 
@@ -41,6 +43,8 @@ def job_queue_2():
     run_android_top_task(country=AppannieCountry.HONG_KONG, query_date=query_date)
     run_ios_top_task(country=AppannieCountry.TAIWAN, query_date=query_date)
     run_android_top_task(country=AppannieCountry.TAIWAN, query_date=query_date)
+
+    re_fire()
     get_logger().info('fix_daily_app_icon_task: %s' % query_date)
     fix_daily_app_icon_task(query_date)
 
@@ -56,8 +60,6 @@ def queue_2_process():
 
 
 if __name__ == '__main__':
-    Process(target=re_fire).start()
-
     cst_start_ios_job_time_str = '05:00'
     cst_start_android_job_time_str = '05:03'
 

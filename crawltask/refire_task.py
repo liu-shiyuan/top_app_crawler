@@ -14,15 +14,16 @@ _stop_time = get_cst_to_machine_hour_and_minute(_re_fire_time_range.__getitem__(
 
 
 def re_fire():
-    while True:
-        now_time = datetime.now().strftime('%H:%M')
-        if _start_time <= now_time <= _stop_time:
-            _do_re_fire()
+    # while True:
+    #     now_time = datetime.now().strftime('%H:%M')
+    #     if _start_time <= now_time <= _stop_time:
+    #         _do_re_fire()
+    _do_re_fire()
 
 
 def _do_re_fire():
     _misfire_jobs = get_queue()
-    if _misfire_jobs and not _misfire_jobs.empty():
+    while _misfire_jobs and not _misfire_jobs.empty():
         re_fire_job = _misfire_jobs.get()
         if re_fire_job:
             try:
