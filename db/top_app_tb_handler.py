@@ -54,7 +54,10 @@ class TopAppDBHandler(DBConnectionHandler):
         set_sql_elements = []
         for _key in _keys:
             if _key in update_columns:
-                set_sql_elements.append('%s = "%s"' % (_key, record[_key]))
+                if _key == TopAppDBField.FIELD_APP_NAME and record[_key]:
+                    set_sql_elements.append('%s = "%s"' % (_key, record[_key].replace('"', '\\"')))
+                else:
+                    set_sql_elements.append('%s = "%s"' % (_key, record[_key]))
         update_column_count = len(set_sql_elements)
         set_sql_stubs = ', '.join(['%s'] * update_column_count)
         set_sql_block = set_sql_stubs % tuple(set_sql_elements)
@@ -79,12 +82,13 @@ if __name__ == '__main__':
     # ret = x.query_record_by_app_id('-wifi')
     # print(str(ret))
 
-    # record = dict()
-    # record[TopAppDBField.FIELD_STORE_URL] = "good"
-    # record[TopAppDBField.FIELD_LAST_UPDATE_DATE] = '2018-08-11'
-    # record[TopAppDBField.FIELD_APP_ID] = '-wifi'
-    # sql = x._get_update_str_sql(record, [TopAppDBField.FIELD_STORE_URL, TopAppDBField.FIELD_LAST_UPDATE_DATE])
-    # print(sql)
+    record = dict()
+    record[TopAppDBField.FIELD_STORE_URL] = "good"
+    record[TopAppDBField.FIELD_LAST_UPDATE_DATE] = '2018-08-11'
+    record[TopAppDBField.FIELD_APP_ID] = '-wifi'
+    record[TopAppDBField.FIELD_APP_NAME] = 'hi "Morn"'
+    sql = x._get_update_str_sql(record, [TopAppDBField.FIELD_APP_NAME, TopAppDBField.FIELD_STORE_URL, TopAppDBField.FIELD_LAST_UPDATE_DATE])
+    print(sql)
 
     # x.close_conn()
 
